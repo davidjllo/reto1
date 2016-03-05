@@ -35,10 +35,33 @@
 
             /* Use this for real authentication
              ----------------------------------------------*/
-            $http.get(urlBase+"1&user="+username+"&pass="+password, {})
-                .success(function (response) {
+            $http.get(urlBase+"1&user="+username+"&pass="+password, {}).then(function successCallback(response){
+                var userId = response.data;
+                alert(response.data);
+                console.log(angular.toJson(response));
+                if(userId == "usererror\n" || userId == "passerror\n"){
+                    console.log("login error");
+                    response = { success : false, message: 'Username or password is incorrect'};
+                }else{
+
+                $rootScope.userId = userId;
+                console.log("login success "+response.data);
+                response = { success : true};    
+                }
+                callback(response);
+
+            },function errorCallback(response){
+                
+            });
+
+                
+
+/* 
+.success(function (response) {
                     callback(response);
+                    console.log("success");
                 });
+*/
 
         }
 

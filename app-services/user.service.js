@@ -8,7 +8,7 @@
     UserService.$inject = ['$http'];
     function UserService($http) {
         var service = {};
-        var urlBase = "http://10.131.137.200/reto1controller/dataAccess.php?op";
+        var urlBase = "http://10.131.137.200/reto1controller/dataAccess.php?op=";
         service.GetAll = GetAll;
         service.GetById = GetById;
         service.GetByUsername = GetByUsername;
@@ -31,7 +31,8 @@
         }
 
         function Create(user) {
-            return $http.get(urlBase+"=2&user="+user.user+"&pass="+user.password).then(handleSuccess, handleError('Error creating user'));
+            console.log(urlBase+"2&user="+user.username+"&pass="+user.password);
+            return $http.get(urlBase+"2&user="+user.username+"&pass="+user.password).then(handleSuccess, handleError('Error creating user'));
         }
 
         function Update(user) {
