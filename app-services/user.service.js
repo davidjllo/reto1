@@ -2,8 +2,8 @@
     'use strict';
 
     angular
-        .module('app')
-        .factory('UserService', UserService);
+    .module('app')
+    .factory('UserService', UserService);
 
     UserService.$inject = ['$http'];
     function UserService($http) {
@@ -30,9 +30,11 @@
             return $http.get('/api/users/' + username).then(handleSuccess, handleError('Error getting user by username'));
         }
 
-        function Create(user) {
-            console.log(urlBase+"2&user="+user.username+"&pass="+user.password);
-            return $http.get(urlBase+"2&user="+user.username+"&pass="+user.password).then(handleSuccess, handleError('Error creating user'));
+        function Create(user, callback) {
+            return $http.get(urlBase+"2&user="+user.username+"&pass="+user.password).then(function successCallback(response){
+                response = { success : true};    
+                return response;
+            }, handleError('Error creating user'));
         }
 
         function Update(user) {

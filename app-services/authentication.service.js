@@ -37,7 +37,7 @@
              ----------------------------------------------*/
             $http.get(urlBase+"1&user="+username+"&pass="+password, {}).then(function successCallback(response){
                 var userId = response.data;
-                alert(response.data);
+            
                 console.log(angular.toJson(response));
                 if(userId == "usererror\n" || userId == "passerror\n"){
                     console.log("login error");
