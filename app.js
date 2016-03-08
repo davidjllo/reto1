@@ -26,7 +26,16 @@
                 templateUrl: 'register/register.view.html',
                 controllerAs: 'vm'
             })
-
+            .when('/search', {
+                controller: 'SearchController',
+                templateUrl: 'search/searchview.html',
+                controllerAs: 'vm'
+            })
+            .when('/Game', {
+                controller: 'GameController',
+                templateUrl: 'game/match.html',
+                controllerAs: 'vm'
+            })
             .otherwise({ redirectTo: '/login' });
     }
 

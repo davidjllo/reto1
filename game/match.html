@@ -1,0 +1,29 @@
+<head>
+	<title>Partida</title>
+</head>
+<style>
+table.cell {    
+	width: 100px;
+    height: 100px;
+    font: 90px sans-serif;
+    text-align: center;
+    vertical-align: center;
+}
+</style>
+<div ng-app="app">
+<h1>Triqui online</h1>
+<div ng-controller="GameController">
+<h3>player: {{player}}</h3>
+  <table border="1" class="cell">
+        <tr ng-repeat="row in [0,1,2]">
+            <td ng-repeat="column in [0,1,2]">a{{cellText(row,column)}}</td>
+        </tr>
+    </table>
+    <br>
+    <br>
+    <form>
+    <input type="int" ng-model="position">
+    <button type="submit">Enviar</button>
+    </form>
+</div>
+</div>

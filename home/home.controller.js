@@ -1,45 +1,16 @@
-﻿(function () {
-    'use strict';
-
-    angular
-        .module('app')
-        .controller('HomeController', HomeController);
-
-    HomeController.$inject = ['UserService', '$rootScope'];
-    function HomeController(UserService, $rootScope) {
-        var vm = this;
-
-        vm.user = null;
-        vm.allUsers = [];
-        vm.deleteUser = deleteUser;
-
-        initController();
-
-        function initController() {
-            loadCurrentUser();
-            loadAllUsers();
+﻿angular.module('app')
+.controller('HomeController', function($scope, $location, $rootScope, UserService) {
+        $scope.newGame = newGame;
+        
+        
+        function newGame(){
+            console.log("creando partida");
+            //uId da el id del jugador, almacenado en rootscope
+            var uId = $rootScope.globals.currentUser.id;
+           // UserService.newGame();
+            $location.path('/Game');
+         
         }
+    
 
-        function loadCurrentUser() {
-            UserService.GetByUsername($rootScope.globals.currentUser.username)
-                .then(function (user) {
-                    vm.user = user;
-                });
-        }
-
-        function loadAllUsers() {
-            UserService.GetAll()
-                .then(function (users) {
-                    vm.allUsers = users;
-                });
-        }
-
-        function deleteUser(id) {
-            UserService.Delete(id)
-            .then(function () {
-                loadAllUsers();
-            });
-        }
-    }
-
-})();
+});

@@ -5,8 +5,8 @@
     .module('app')
     .factory('UserService', UserService);
 
-    UserService.$inject = ['$http'];
-    function UserService($http) {
+    UserService.$inject = ['$http','$rootScope'];
+    function UserService($http, $rootScope) {
         var service = {};
         var urlBase = "http://10.131.137.200/reto1controller/dataAccess.php?op=";
         service.GetAll = GetAll;
@@ -17,6 +17,11 @@
         service.Delete = Delete;
 
         return service;
+        
+        function newGame(){
+            var id = $rootScope.globals.currentUser.id;
+            console.log("player id: " +id);
+        }
 
         function GetAll() {
             return $http.get('/api/users').then(handleSuccess, handleError('Error getting all users'));
@@ -46,16 +51,32 @@
         }
 
         // private functions
+    function getGames(playerId){
+        try {
+            var q = $q.defer();
+            $http.get(urlBase+"7&player="+playerId).success(function(data){
+            q.resolve(data);
+              });
+            return q.promise;
 
-        function handleSuccess(res) {
-            return res.data;
-        }
+            }
+            catch(err) {
 
-        function handleError(error) {
-            return function () {
-                return { success: false, message: error };
-            };
+            }
         }
     }
+
+
+
+    function handleSuccess(res) {
+        return res.data;
+    }
+
+    function handleError(error) {
+        return function () {
+            return { success: false, message: error };
+        };
+    }
+
 
 })();

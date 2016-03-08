@@ -44,9 +44,8 @@
                     response = { success : false, message: 'Username or password is incorrect'};
                 }else{
 
-                $rootScope.userId = userId;
-                console.log("login success "+response.data);
-                response = { success : true};    
+                console.log("login success "+ userId);
+                response = { success : true, uId: userId};    
                 }
                 callback(response);
 
@@ -65,12 +64,12 @@
 
         }
 
-        function SetCredentials(username, password) {
+        function SetCredentials(username, password, id) {
             var authdata = Base64.encode(username + ':' + password);
-
             $rootScope.globals = {
                 currentUser: {
                     username: username,
+                    id: id,
                     authdata: authdata
                 }
             };

@@ -1,11 +1,16 @@
-﻿<h1>Hi {{vm.user.firstName}}!</h1>
-<p>You're logged in!!</p>
-<h3>All registered users:</h3>
-<ul>
-    <li ng-repeat="user in vm.allUsers">
-        {{user.username}} ({{user.firstName}} {{user.lastName}})
-        - <a href="#" ng-click="vm.deleteUser(user.id)">Delete</a>
-    </li>
-</ul>
+﻿<div ng-app="app">
+<div ng-controller="HomeController">
+<h1>Triqui online</h1>
+<br>
+<p><a href="#/search" class="btn btn-primary">Buscar partidas</a></p>
+<br>
+<p><a ng-click="newGame()" class="btn btn-primary">Crear partida</a></p>
+<br>
 <p>&nbsp;</p>
 <p><a href="#/login" class="btn btn-primary">Logout</a></p>
+</div>
+</div>
+
+
+
+
